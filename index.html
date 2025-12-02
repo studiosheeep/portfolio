@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>studiosheeep portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- おしゃれフォント（見出し用） -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f4f5;
+      --card-bg: #ffffff;
+      --text-main: #111827;
+      --text-sub: #4b5563;
+      --text-muted: #6b7280; /* ちょっと濃いグレー */
+      --accent: #16a34a;
+      --border-soft: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+    }
+
+    .page {
+      min-height: 100vh;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 16px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .site-title {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+
+    .contact {
+      margin: 0 0 6px;
+      font-size: 0.95rem;
+      color: var(--text-sub);
+    }
+
+    .contact a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(22, 163, 74, 0.35);
+      padding-bottom: 1px;
+    }
+
+    .contact a:hover {
+      opacity: 0.85;
+    }
+
+    .note {
+      margin: 4px 0 0;
+      font-size: 0.85rem;
+      color: var(--text-muted); /* 指定のちょっと濃いグレー */
+    }
+
+    .works {
+      margin-top: 24px;
+    }
+
+    .works-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-sub);
+      margin: 0 0 12px;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      border: 1px solid var(--border-soft);
+      padding: 12px 12px 14px;
+      box-shadow:
+        0 10px 25px rgba(15, 23, 42, 0.06),
+        0 0 0 1px rgba(255, 255, 255, 0.8);
+      display: flex;
+      flex-direction: column;
+      transition:
+        transform 0.18s ease-out,
+        box-shadow 0.18s ease-out;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 14px 30px rgba(15, 23, 42, 0.09),
+        0 0 0 1px rgba(255, 255, 255, 0.9);
+    }
+
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.16), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.18), transparent 60%),
+        #e5e7eb;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 0 0 4px;
+    }
+
+    .card-url {
+      font-size: 0.8rem;
+      margin: 0 0 6px;
+      color: var(--text-sub);
+      word-break: break-all;
+    }
+
+    .card-url a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(22, 163, 74, 0.35);
+      padding-bottom: 1px;
+    }
+
+    .card-url a:hover {
+      opacity: 0.85;
+    }
+
+    .card-desc {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      line-height: 1.5;
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    /* ===== レスポンシブ対応 ===== */
+
+    @media (max-width: 900px) {
+      .page {
+        padding: 28px 16px 32px;
+      }
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* iPhone SE など狭い幅想定 */
+    @media (max-width: 600px) {
+      .page {
+        padding: 24px 14px 32px;
+        justify-content: flex-start;
+      }
+
+      .hero {
+        margin-bottom: 24px;
+      }
+
+      .site-title {
+        font-size: 2.1rem;
+        letter-spacing: 0.16em;
+      }
+
+      .contact {
+        font-size: 0.9rem;
+      }
+
+      .note {
+        font-size: 0.8rem;
+      }
+
+      .cards {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+      }
+
+      .card {
+        border-radius: 16px;
+        padding: 10px 10px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <h1 class="site-title">studiosheeep</h1>
+      <p class="contact">
+        Contact:
+        <a href="mailto:studiosheeep@gmail.com">studiosheeep@gmail.com</a>
+      </p>
+      <p class="note">
+        2025年3月末に現在の会社を退社予定です。なにかご連絡あれば幸いです。
+      </p>
+    </header>
+
+    <main class="works">
+      <h2 class="works-title">Works</h2>
+      <div class="cards">
+
+        <!-- 1つ目のカード -->
+        <article class="card">
+          <div class="card-thumb">
+            <!-- サムネイル画像を使う場合は下のコメントアウトを解除して src を差し替え -->
+            <!-- <img src="thumb1.jpg" alt="作品1のサムネイル"> -->
+            Thumbnail 1
+          </div>
+          <h3 class="card-title">作品タイトル 1</h3>
+          <p class="card-url">
+            <a href="https://example.com/work1" target="_blank" rel="noopener noreferrer">
+              https://example.com/work1
+            </a>
+          </p>
+          <p class="card-desc">
+            作品1の簡単な説明文をここに入れます。使用技術や役割などを1〜2行でまとめてください。
+          </p>
+        </article>
+
+        <!-- 2つ目のカード -->
+        <article class="card">
+          <div class="card-thumb">
+            <!-- <img src="thumb2.jpg" alt="作品2のサムネイル"> -->
+            Thumbnail 2
+          </div>
+          <h3 class="card-title">作品タイトル 2</h3>
+          <p class="card-url">
+            <a href="https://example.com/work2" target="_blank" rel="noopener noreferrer">
+              https://example.com/work2
+            </a>
+          </p>
+          <p class="card-desc">
+            作品2の説明文。ゲーム、ツール、漫画サイトなど、どういうものかが分かる短い紹介を書きます。
+          </p>
+        </article>
+
+        <!-- 3つ目のカード -->
+        <article class="card">
+          <div class="card-thumb">
+            <!-- <img src="thumb3.jpg" alt="作品3のサムネイル"> -->
+            Thumbnail 3
+          </div>
+          <h3 class="card-title">作品タイトル 3</h3>
+          <p class="card-url">
+            <a href="https://example.com/work3" target="_blank" rel="noopener noreferrer">
+              https://example.com/work3
+            </a>
+          </p>
+          <p class="card-desc">
+            作品3の説明文。ターゲットやこだわったポイントなどを簡潔に書いてください。
+          </p>
+        </article>
+
+      </div>
+    </main>
+  </div>
+</body>
+</html>
